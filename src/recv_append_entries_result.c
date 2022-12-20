@@ -7,6 +7,7 @@
 
 #define tracef(...) Tracef(r->tracer, __VA_ARGS__)
 
+// INSTRUMENT_FUNC
 int recvAppendEntriesResult(struct raft *r,
                             const raft_id id,
                             const char *address,

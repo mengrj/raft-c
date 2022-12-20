@@ -13,6 +13,7 @@ static void requestVoteSendCb(struct raft_io_send *req, int status)
     raft_free(req);
 }
 
+// INSTRUMENT_FUNC
 int recvRequestVote(struct raft *r,
                     const raft_id id,
                     const char *address,
