@@ -41,6 +41,7 @@ struct sendAppendEntries
 };
 
 /* Callback invoked after request to send an AppendEntries RPC has completed. */
+// INSTRUMENT_FUNC
 static void sendAppendEntriesCb(struct raft_io_send *send, const int status)
 {
     struct sendAppendEntries *req = send->data;
@@ -63,6 +64,7 @@ static void sendAppendEntriesCb(struct raft_io_send *send, const int status)
 
 /* Send an AppendEntries message to the i'th server, including all log entries
  * from the given point onwards. */
+// INSTRUMENT_FUNC
 static int sendAppendEntries(struct raft *r,
                              const unsigned i,
                              const raft_index prev_index,
@@ -148,6 +150,7 @@ struct sendInstallSnapshot
     raft_id server_id;               /* Destination server. */
 };
 
+// INSTRUMENT_FUNC
 static void sendInstallSnapshotCb(struct raft_io_send *send, int status)
 {
     struct sendInstallSnapshot *req = send->data;
@@ -170,6 +173,7 @@ static void sendInstallSnapshotCb(struct raft_io_send *send, int status)
     raft_free(req);
 }
 
+// INSTRUMENT_FUNC
 static void sendSnapshotGetCb(struct raft_io_snapshot_get *get,
                               struct raft_snapshot *snapshot,
                               int status)
@@ -246,6 +250,7 @@ out:
 }
 
 /* Send the latest snapshot to the i'th server */
+// INSTRUMENT_FUNC
 static int sendSnapshot(struct raft *r, const unsigned i)
 {
     struct raft_server *server = &r->configuration.servers[i];
@@ -658,6 +663,7 @@ err:
     return rv;
 }
 
+// INSTRUMENT_FUNC
 int replicationUpdate(struct raft *r,
                       const struct raft_server *server,
                       const struct raft_append_entries_result *result)
@@ -787,6 +793,7 @@ static void sendAppendEntriesResultCb(struct raft_io_send *req, int status)
     RaftHeapFree(req);
 }
 
+// INSTRUMENT_FUNC
 static void sendAppendEntriesResult(
     struct raft *r,
     const struct raft_append_entries_result *result)
@@ -975,6 +982,7 @@ static int checkLogMatchingProperty(struct raft *r,
  * The i output parameter will be set to the array index of the first new log
  * entry that we don't have yet in our log, among the ones included in the given
  * AppendEntries request. */
+// INSTRUMENT_FUNC
 static int deleteConflictingEntries(struct raft *r,
                                     const struct raft_append_entries *args,
                                     size_t *i)
@@ -1033,6 +1041,7 @@ static int deleteConflictingEntries(struct raft *r,
     return 0;
 }
 
+// INSTRUMENT_FUNC
 int replicationAppend(struct raft *r,
                       const struct raft_append_entries *args,
                       raft_index *rejected,
@@ -1507,6 +1516,7 @@ static int takeSnapshotAsync(struct raft_io_async_work *take)
     return r->fsm->snapshot_async(r->fsm, &snapshot->bufs, &snapshot->n_bufs);
 }
 
+// INSTRUMENT_FUNC
 static int takeSnapshot(struct raft *r)
 {
     struct raft_snapshot *snapshot;
@@ -1565,6 +1575,7 @@ abort:
     return rv;
 }
 
+// INSTRUMENT_FUNC
 int replicationApply(struct raft *r)
 {
     raft_index index;
@@ -1620,6 +1631,7 @@ int replicationApply(struct raft *r)
     return rv;
 }
 
+// INSTRUMENT_FUNC
 void replicationQuorum(struct raft *r, const raft_index index)
 {
     size_t votes = 0;
