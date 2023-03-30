@@ -10,7 +10,7 @@
 #include "tracing.h"
 
 #define tracef(...) Tracef(r->tracer, __VA_ARGS__)
-
+// INSTRUMENT_FUNC
 void snapshotClose(struct raft_snapshot *s)
 {
     unsigned i;
@@ -21,12 +21,14 @@ void snapshotClose(struct raft_snapshot *s)
     raft_free(s->bufs);
 }
 
+// INSTRUMENT_FUNC
 void snapshotDestroy(struct raft_snapshot *s)
 {
     snapshotClose(s);
     raft_free(s);
 }
 
+// INSTRUMENT_FUNC
 int snapshotRestore(struct raft *r, struct raft_snapshot *snapshot)
 {
     int rv;
@@ -56,6 +58,7 @@ int snapshotRestore(struct raft *r, struct raft_snapshot *snapshot)
     return 0;
 }
 
+// INSTRUMENT_FUNC
 int snapshotCopy(const struct raft_snapshot *src, struct raft_snapshot *dst)
 {
     int rv;
