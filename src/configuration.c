@@ -111,6 +111,7 @@ int configurationCopy(const struct raft_configuration *src,
     return 0;
 }
 
+// INSTRUMENT_FUNC
 int configurationAdd(struct raft_configuration *c,
                      raft_id id,
                      const char *address,
@@ -159,6 +160,7 @@ int configurationAdd(struct raft_configuration *c,
     return 0;
 }
 
+// INSTRUMENT_FUNC
 int configurationRemove(struct raft_configuration *c, const raft_id id)
 {
     unsigned i;
@@ -234,6 +236,7 @@ size_t configurationEncodedSize(const struct raft_configuration *c)
     return bytePad64(n);
 }
 
+// INSTRUMENT_FUNC
 void configurationEncodeToBuf(const struct raft_configuration *c, void *buf)
 {
     void *cursor = buf;
