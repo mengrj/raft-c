@@ -8,7 +8,7 @@
 #include "tracing.h"
 
 #define tracef(...) Tracef(r->tracer, __VA_ARGS__)
-
+// INSTRUMENT_FUNC
 int recvTimeoutNow(struct raft *r,
                    const raft_id id,
                    const char *address,

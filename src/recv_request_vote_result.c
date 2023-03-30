@@ -9,7 +9,7 @@
 #include "tracing.h"
 
 #define tracef(...) Tracef(r->tracer, __VA_ARGS__)
-
+// INSTRUMENT_FUNC
 int recvRequestVoteResult(struct raft *r,
                           raft_id id,
                           const char *address,

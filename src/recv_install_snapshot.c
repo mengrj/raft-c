@@ -15,6 +15,7 @@ static void installSnapshotSendCb(struct raft_io_send *req, int status)
     raft_free(req);
 }
 
+// INSTRUMENT_FUNC
 int recvInstallSnapshot(struct raft *r,
                         const raft_id id,
                         const char *address,
