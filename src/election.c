@@ -18,6 +18,7 @@ struct followerOrCandidateState
 };
 
 /* Return a pointer to either the follower or candidate state. */
+// INSTRUMENT_FUNC
 struct followerOrCandidateState *getFollowerOrCandidateState(struct raft *r)
 {
     struct followerOrCandidateState *state;
@@ -30,6 +31,7 @@ struct followerOrCandidateState *getFollowerOrCandidateState(struct raft *r)
     return state;
 }
 
+// INSTRUMENT_FUNC
 void electionResetTimer(struct raft *r)
 {
     struct followerOrCandidateState *state = getFollowerOrCandidateState(r);
@@ -41,6 +43,7 @@ void electionResetTimer(struct raft *r)
     r->election_timer_start = r->io->time(r->io);
 }
 
+// INSTRUMENT_FUNC
 bool electionTimerExpired(struct raft *r)
 {
     struct followerOrCandidateState *state = getFollowerOrCandidateState(r);
@@ -55,6 +58,7 @@ static void sendRequestVoteCb(struct raft_io_send *send, int status)
 }
 
 /* Send a RequestVote RPC to the given server. */
+// INSTRUMENT_FUNC
 static int electionSend(struct raft *r, const struct raft_server *server)
 {
     struct raft_message message;
@@ -185,6 +189,7 @@ err:
     return rv;
 }
 
+// INSTRUMENT_FUNC
 int electionVote(struct raft *r,
                  const struct raft_request_vote *args,
                  bool *granted)
@@ -277,6 +282,7 @@ grant_vote:
     return 0;
 }
 
+// INSTRUMENT_FUNC
 bool electionTally(struct raft *r, size_t voter_index)
 {
     size_t n_voters = configurationVoterCount(&r->configuration);

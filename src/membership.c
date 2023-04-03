@@ -9,7 +9,7 @@
 #include "tracing.h"
 
 #define tracef(...) Tracef(r->tracer, __VA_ARGS__)
-
+// INSTRUMENT_FUNC
 int membershipCanChangeConfiguration(struct raft *r)
 {
     int rv;
@@ -53,6 +53,7 @@ err:
     return rv;
 }
 
+// INSTRUMENT_FUNC
 bool membershipUpdateCatchUpRound(struct raft *r)
 {
     unsigned server_index;
@@ -109,6 +110,7 @@ bool membershipUpdateCatchUpRound(struct raft *r)
     return false;
 }
 
+// INSTRUMENT_FUNC
 int membershipUncommittedChange(struct raft *r,
                                 const raft_index index,
                                 const struct raft_entry *entry)
@@ -142,6 +144,7 @@ err:
     return rv;
 }
 
+// INSTRUMENT_FUNC
 int membershipRollback(struct raft *r)
 {
     const struct raft_entry *entry;

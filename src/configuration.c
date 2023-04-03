@@ -111,6 +111,7 @@ int configurationCopy(const struct raft_configuration *src,
     return 0;
 }
 
+// INSTRUMENT_FUNC
 int configurationAdd(struct raft_configuration *c,
                      raft_id id,
                      const char *address,
@@ -159,6 +160,7 @@ int configurationAdd(struct raft_configuration *c,
     return 0;
 }
 
+// INSTRUMENT_FUNC
 int configurationRemove(struct raft_configuration *c, const raft_id id)
 {
     unsigned i;

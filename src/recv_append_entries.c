@@ -17,6 +17,7 @@ static void recvSendAppendEntriesResultCb(struct raft_io_send *req, int status)
     HeapFree(req);
 }
 
+// INSTRUMENT_FUNC
 int recvAppendEntries(struct raft *r,
                       raft_id id,
                       const char *address,
